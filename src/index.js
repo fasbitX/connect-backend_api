@@ -5,6 +5,8 @@ import * as ENV from './config/env';
 const app = express();
 
 // db connection
+console.log(ENV.mongoDbUrl);
+
 mongoose.connect(ENV.mongoDbUrl, { useNewUrlParser: true });
 
 app.use(express.urlencoded({extended: true}));
