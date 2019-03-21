@@ -5,7 +5,12 @@ import * as ENV from './config/env';
 const app = express();
 
 // db connection
+console.log("Mongo Connection: ", ENV.mongoDbUrl);
 mongoose.connect(ENV.mongoDbUrl, { useNewUrlParser: true });
+console.log("*****************************Mongo Connection2: *************************** ");
+console.log(mongoose.connection.readyState);
+console.log("*****************************Mongo Connection2: *************************** ");
+
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
