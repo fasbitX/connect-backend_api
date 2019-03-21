@@ -19,8 +19,9 @@ export const createUser = async (req, res) => {
     }else{
 
         let otp = await sendSms(req.body.country_code,req.body.mobile_number);
+console.log("SMS OUT ou", otp);
 
-        let URL = 'http://18.223.136.149:4000/account';
+        let URL = 'http://165.227.77.160:4000/account';
     axios.post(URL)
     .then((body) => {
         console.log('====> '+body.data.toString())
