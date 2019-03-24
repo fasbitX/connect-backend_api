@@ -47,18 +47,22 @@ export const sendSms = async (country_code,NUMBER) => {
     console.log('send sms number :'+country_code+NUMBER)
     let mNumber = country_code+NUMBER;
     let OTP = await generateOtp();
-    var accountSid = 'AC562f55dc9fda33f988943132f2554841'; // Your Account SID from www.twilio.com/console
-    var authToken = '034b81d8531a967fe246dfcaa2c38b18';   // Your Auth Token from www.twilio.com/console
+    var accountSid = process.env.TW_ACCOUNTSID;
+    var authToken = process.env.TW_AUTHTOKEN;
 
+    console.log(process.env.TW_ACCOUNTSID);
     var twilio = require('twilio');
     var client = new twilio(accountSid, authToken);
     let msg = 'Your One time password is '+OTP;
+    console.log(msg);
     client.messages.create({
         body: msg,
         to: mNumber.toString(),  // Text this number
-        from: '+18638671104' // From a valid Twilio number
+        from: process.env.TW_FROM_NO // From a valid Twilio number
     })
-    .then((message) => console.log(message.sid));
+    .then((message) => console.log(message.sid)).catch((err) => {
+        console.log(err);
+    });
 
     
     // let API_KEY = "d37cc8c6-18f7-11e7-9462-00163ef91450";
